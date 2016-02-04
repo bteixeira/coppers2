@@ -3,7 +3,12 @@ extends layout
 block content
     h1= title
     p Welcome to #{title}
+    ul.list
     form
-        input(name="name")
+        label Amount
+        input(name="amount")
+        label Tags
+        input(name="tags")
+        label Description
+        input(name="description")
         button.add Add
-        button.delete Delete
