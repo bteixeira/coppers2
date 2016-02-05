@@ -23,7 +23,7 @@ var DetailedTable = (function () {
                     $table.append($tbody);
                     $data.append($table);
                 }
-                $tbody.append('<tr><td>' + spending.amount + '</td><td>' + spending.tags + '</td></tr>');
+                $tbody.append('<tr><td>' + spending.amount + '</td><td>' + spending.tags.map(function(tag){return '#' + tag;}).join(' ') + '</td></tr>');
             });
         }
     };

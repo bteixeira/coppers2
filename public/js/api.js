@@ -7,7 +7,8 @@ var API = (function () {
                         amount: raw.amount && parseFloat(raw.amount.replace('.', '').replace(',','.')),
                         date: new Date(raw.date),
                         description: raw.description,
-                        id: raw.id
+                        id: raw.id,
+                        tags: raw.tags
                     });
                 }));
             });

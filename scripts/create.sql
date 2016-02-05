@@ -14,12 +14,12 @@ alter table Spendings add column "date" timestamp with time zone;
 alter table Spendings add column description text;
 
 
-create table Tags (id serial);
-alter table Tags add column name varchar(255);
+--create table Tags (id serial);
+--alter table Tags add column name varchar(255);
+--drop table Tags;
 
-
-create table Spendings_Tags (id_spending integer, id_tag integer);
-
+create table Spendings_Tags (id_spending integer, tag varchar(255));
+--drop table Spendings_Tags;
 
 #####
 
