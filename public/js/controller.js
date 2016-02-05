@@ -22,4 +22,16 @@ $(function () {
             doSearch();
         });
     });
+
+    var $data = $('#data');
+    $data.on('click', '.js-delete', function (ev) {
+        ev.preventDefault();
+        if (confirm('Really delete?')) {
+            var id = $(this).data('id');
+            API.delete(id, function () {
+                console.log('deleted ID ' + id);
+                doSearch();
+            });
+        }
+    });
 });

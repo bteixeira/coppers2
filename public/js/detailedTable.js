@@ -23,7 +23,14 @@ var DetailedTable = (function () {
                     $table.append($tbody);
                     $data.append($table);
                 }
-                $tbody.append('<tr><td>' + spending.amount + '</td><td>' + spending.tags.map(function(tag){return '#' + tag;}).join(' ') + '</td></tr>');
+                $tbody.append(
+                    '<tr><td>' +
+                        spending.amount +
+                    '</td><td>' +
+                        spending.tags.map(function(tag){return '#' + tag;}).join(' ') +
+                    '</td><td>' +
+                        '<button class="js-delete" data-id="' + spending.id + '">X</button>' +
+                    '</td></tr>');
             });
         }
     };

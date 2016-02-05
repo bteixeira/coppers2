@@ -17,6 +17,11 @@ var API = (function () {
             $.post('/api/new', data, function (data) {
                 cb(data.id);
             });
+        },
+        delete: function (id, cb) {
+            $.post('/api/delete', {id: id}, function () {
+                cb();
+            });
         }
     }
 }());

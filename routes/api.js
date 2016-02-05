@@ -67,7 +67,11 @@ router.post('/edit', function(req, res) {
 });
 
 router.post('/delete', function(req, res) {
-    res.send('are you sure?');
+    db.none(`DELETE FROM Spendings WHERE id = $1;`, [req.body.id]).then(function () {
+        res.send('ok');
+    }).catch(function (err) {
+        res.send(err);
+    });
 });
 
 router.get('/search', function(req, res) {
