@@ -11,6 +11,11 @@ var API = (function () {
                     });
                 }));
             });
+        },
+        new: function (data, cb) {
+            $.post('/api/new', data, function (data) {
+                cb(data.id);
+            });
         }
     }
 }());
