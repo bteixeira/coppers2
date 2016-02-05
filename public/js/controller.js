@@ -1,9 +1,13 @@
 $(function () {
 
-    doSearch();
-
     function doSearch() {
-        API.search({}, function (spendings) {
+        var params = {};
+        $formFilters.find('input').each(function () {
+            if (this.value) {
+                params[this.name] = this.value;
+            }
+        });
+        API.search(params, function (spendings) {
             console.log(spendings);
             DetailedTable.set(spendings);
         });
@@ -34,4 +38,12 @@ $(function () {
             });
         }
     });
+
+    var $formFilters = $('#form-filters');
+    $formFilters.on('click', 'button', function (ev) {
+        ev.preventDefault();
+        doSearch();
+    });
+
+    doSearch();
 });

@@ -17,7 +17,7 @@ var router = express.Router();
 
 var data = [];
 
-router.post('/new', function(req, res) {
+router.post('/new', function (req, res) {
     console.log(req.body);
 
     var amount = req.body.amount;
@@ -62,11 +62,11 @@ router.post('/new', function(req, res) {
 
 });
 
-router.post('/edit', function(req, res) {
+router.post('/edit', function (req, res) {
     res.send('make changes');
 });
 
-router.post('/delete', function(req, res) {
+router.post('/delete', function (req, res) {
     db.none(`DELETE FROM Spendings WHERE id = $1;`, [req.body.id]).then(function () {
         res.send('ok');
     }).catch(function (err) {
@@ -74,14 +74,38 @@ router.post('/delete', function(req, res) {
     });
 });
 
-router.get('/search', function(req, res) {
+router.get('/search', function (req, res) {
     // TODO
     // TODO
     // TODO
     // TODO
     // TODO OMFG FIGURE OUT HOW TO DO THIS WITH A SQL JOIN
 
-    db.many('SELECT * FROM Spendings ORDER BY date ASC;', []).then(function (spendings) {
+    console.log('REQ:', req.query);
+
+    var q = 'SELECT * FROM Spendings ';
+    var params = [];
+    var first = true;
+    for (var p in req.query) {
+        if (req.query.hasOwnProperty(p)) {
+            params.push(req.query[p]);
+            if (first) {
+                q += 'WHERE ';
+                first = false;
+            } else {
+                q += 'AND ';
+            }
+            if (p === 'amount-min') {
+                q += 'amount >= $' + params.length + ' ';
+            } else if (p === 'amount-max') {
+                q += 'amount <= $' + params.length + ' ';
+            }
+        }
+    }
+
+    q += 'ORDER BY date ASC;';
+
+    db.many(q, params).then(function (spendings) {
         db.many(`SELECT * FROM Spendings_Tags;`, []).then(function (tags) {
             var byId = {};
             spendings.forEach(function (spending) {
@@ -90,7 +114,9 @@ router.get('/search', function(req, res) {
             });
 
             tags.forEach(function (tag) {
-                byId[tag.id_spending].tags.push(tag.tag);
+                if (byId.hasOwnProperty(tag.id_spending)) {
+                    byId[tag.id_spending].tags.push(tag.tag);
+                }
             });
             res.send(spendings);
         }).catch(function (err) {
