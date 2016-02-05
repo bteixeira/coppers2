@@ -15,7 +15,7 @@ var router = express.Router();
 
 var data = [];
 
-router.post('/new', function(req, res, next) {
+router.post('/new', function(req, res) {
     console.log(req.body);
 
     var amount = req.body.amount;
@@ -40,16 +40,22 @@ router.post('/new', function(req, res, next) {
 
 });
 
-router.post('/edit', function(req, res, next) {
+router.post('/edit', function(req, res) {
     res.send('make changes');
 });
 
-router.post('/delete', function(req, res, next) {
+router.post('/delete', function(req, res) {
     res.send('are you sure?');
 });
 
-router.get('/search', function(req, res, next) {
-    res.send('send back items that match params');
+router.get('/search', function(req, res) {
+    //res.send('send back items that match params');
+    db.many('SELECT * FROM Spendings ORDER BY date ASC;', []).then(function (data) {
+        res.send(data);
+    }).catch(function (err) {
+        console.log(err);
+        res.send(err);
+    });
 });
 
 module.exports = router;
