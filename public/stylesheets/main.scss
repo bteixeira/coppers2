@@ -9,3 +9,22 @@
     width: 100%;
   }
 }
+
+#data {
+  table {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  th {
+    text-align: left;
+  }
+  td.amount {
+    width: 50px;
+  }
+  td.tags {
+    width: 100%;
+  }
+  tbody tr:nth-child(odd) {
+    background: $border-gray;
+  }
+}
