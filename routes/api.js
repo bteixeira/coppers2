@@ -109,6 +109,13 @@ router.get('/search', function (req, res) {
         }
     }
 
+    // TODO GROUPING
+    //YEARLY: select extract(year from date) as year, sum(amount) from spendings group by year;
+    //MONTHLY: select extract(year from date) as year, EXTRACT(month from date) as month, sum(amount) from spendings group by year, month;
+    //DAYLY: select extract(year from date) as year, EXTRACT(month from date) as month, extract (day from date) as day, sum(amount) from spendings group by year, month, day;
+    //WEEKLY: select extract(year from date) as year, extract(week from date) as week, sum(amount) from spendings group by year,  week;
+    //BY TAG: select spendings_tags.tag, sum(spendings.amount) from spendings, spendings_tags where spendings.id = spendings_Tags.id_spending group by spendings_tags.tag;
+
     q += 'ORDER BY date ASC;';
 
     db.many(q, params).then(function (spendings) {
