@@ -99,6 +99,12 @@ router.get('/search', function (req, res) {
                 q += 'amount >= $' + params.length + ' ';
             } else if (p === 'amount-max') {
                 q += 'amount <= $' + params.length + ' ';
+            } else if (p === 'date-min') {
+                q += 'date >= $' + params.length + ' ';
+                params[params.length - 1] = new Date(params[params.length - 1]);
+            } else if (p === 'date-max') {
+                q += 'date <= $' + params.length + ' ';
+                params[params.length - 1] = new Date(params[params.length - 1]);
             }
         }
     }

@@ -7,6 +7,16 @@ $(function () {
                 params[this.name] = this.value;
             }
         });
+        var dateMin = params['date-min'];
+        if (dateMin) {
+            var p = dateMin.split('-');
+            params['date-min'] = new Date(p[0], p[1] - 1, p[2], 0, 0, 0);
+        }
+        var dateMax = params['date-max'];
+        if (dateMax) {
+            p = dateMax.split('-');
+            params['date-max'] = new Date(p[0], p[1] - 1, p[2], 23, 59, 59);
+        }
         API.search(params, function (spendings) {
             console.log(spendings);
             DetailedTable.set(spendings);
