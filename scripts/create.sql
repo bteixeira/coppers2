@@ -1,26 +1,30 @@
-## sudo -u postgres createuser -P coppers2_admin
-## sudo -u postgres createdb -O coppers2_admin coppers2
-## psql -h localhost -U coppers2_admin -d coppers2
+-- sudo -u postgres createuser -P coppers2_admin
+-- sudo -u postgres createdb -O coppers2_admin coppers2
+-- psql -h localhost -U coppers2_admin -d coppers2
 
+CREATE TABLE
+IF NOT EXISTS
+Users (
+    id SERIAL PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL
+);
 
-create table Users (id serial);
-alter table Users add column email text;
+CREATE TABLE
+IF NOT EXISTS
+Spendings (
+    id SERIAL PRIMARY KEY,
+    id_user INTEGER REFERENCES Users NOT NULL,
+    amount MONEY,
+    "date" TIMESTAMP WITH TIME ZONE,
+    description TEXT
+);
 
+CREATE TABLE
+IF NOT EXISTS
+Spendings_Tags (
+    id_spending INTEGER REFERENCES Spendings NOT NULL,
+    tag VARCHAR(255) NOT NULL
+);
 
-create table Spendings (id serial);
-alter table Spendings add column id_user integer;
-alter table Spendings add column amount money;
-alter table Spendings add column "date" timestamp with time zone;
-alter table Spendings add column description text;
-
-
---create table Tags (id serial);
---alter table Tags add column name varchar(255);
---drop table Tags;
-
-create table Spendings_Tags (id_spending integer, tag varchar(255));
---drop table Spendings_Tags;
-
-#####
-
-insert into Users (email) values ('tester@coppers.cop');
+INSERT INTO Users (email)
+VALUES ('tester@coppers.cop');

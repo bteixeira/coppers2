@@ -38,12 +38,12 @@ router.post('/new', function (req, res) {
             date,
             description
         ) VALUES (
-            1,
             $1,
             $2,
-            $3
+            $3,
+            $4
         ) RETURNING ID;
-    `, [amount, date, description]).then(function (data) {
+    `, [req.session.uid, amount, date, description]).then(function (data) {
         db.none(
             tags.map(function (tag) {
                 return `
@@ -83,18 +83,12 @@ router.get('/search', function (req, res) {
 
     console.log('REQ:', req.query);
 
-    var q = 'SELECT * FROM Spendings ';
-    var params = [];
-    var first = true;
+    var q = 'SELECT * FROM Spendings WHERE id_user = $1';
+    var params = [req.session.uid];
     for (var p in req.query) {
         if (req.query.hasOwnProperty(p)) {
             params.push(req.query[p]);
-            if (first) {
-                q += 'WHERE ';
-                first = false;
-            } else {
-                q += 'AND ';
-            }
+            q += 'AND ';
             if (p === 'amount-min') {
                 q += 'amount >= $' + params.length + ' ';
             } else if (p === 'amount-max') {

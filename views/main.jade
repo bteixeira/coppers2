@@ -2,6 +2,9 @@ extends layout
 
 block content
     div.section
+        = 'You are: '
+        strong= email
+    div.section
         form#form-new
             input(name="date" placeholder="When (now)" disabled)
             input(name="amount" placeholder="How much")
@@ -26,3 +29,5 @@ block content
                 option Weekly
                 option Monthly
                 option Yearly
+    div.section
+        a(href="/logout") Log out

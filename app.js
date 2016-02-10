@@ -28,9 +28,53 @@ app.use(require('node-sass-middleware')({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+/***************************** SESSION *************************************/
+var pg = require('pg') // TODO FIGURE OUT HOW TO USE THE pg-promise CONNECTION POOL
+//var pg = require('pg-promise')({
+//        connect: function (client) {
+//            console.log('CONNECT');
+//        }, disconnect: function (client) {
+//            console.log('DISCONNECT');
+//        }, query: function (client) {
+//            console.log('QUERY');
+//            console.log(client.query);
+//        }, error: function (error) {
+//            console.log('ERROR');
+//            console.log(error);
+//        }
+//    })('postgres://coppers2_admin:coppers2@localhost/coppers2')
+    , session = require('express-session')
+    , pgSession = require('connect-pg-simple')(session);
+
+app.use(session({
+    name: 'frx$_',
+    store: new pgSession({
+        pg : pg,                                  // Use global pg-module
+        //conString : process.env.FOO_DATABASE_URL, // Connect using something else than default DATABASE_URL env variable
+        conString : 'postgres://coppers2_admin:coppers2@localhost/coppers2'//, // Connect using something else than default DATABASE_URL env variable
+        //tableName : 'user_sessions'               // Use another table-name than the default "session" one
+    }),
+    secret: "I've seen things you people wouldn't believe",
+    resave: false,
+    saveUninitialized: false,
+    unset: 'destroy',
+    rolling: false,
+    //cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+    cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
+}));
+
+
+module.exports = app;
+/*************************************************************************************/
+
+
+
 app.use('/', routes);
 app.use('/api', api);
 app.use('/login', require('./routes/login'));
+app.use('/logout', require('./routes/logout'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
