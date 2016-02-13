@@ -21,13 +21,16 @@ router.post('/new', function (req, res) {
     console.log(req.body);
 
     var amount = req.body.amount;
-    var date = new Date();
+    var date = new Date(req.body.date);
     var description = req.body.description;
 
     var tags = req.body.tags;
     if (typeof tags === 'string') {
         tags = tags.split(/\s+/);
     }
+    tags = tags.map(function (tag) {
+        return tag.charAt(0) === '#' ? tag.slice(1) : tag;
+    });
 
     // TODO TAGS MAY BE DUPLICATED
 

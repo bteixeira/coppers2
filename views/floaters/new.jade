@@ -1,3 +1,4 @@
+- var n
 #floater-add-new.floater
     a.trigger-close(href='#')
         span.batch-icon &#xf165;
@@ -5,20 +6,10 @@
     form#form-new
         .form-group.date
             label On
-            select
-                option Jan
-                option Feb
-                option Mar
-                option Apr
-                option May
-                option Jun
-                option Jul
-                option Aug
-                option Sep
-                option Oct
-                option Nov
-                option Dec
-            select
+            select(name="date-month")
+                each val, i in ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                    option(value=(i + 1))= val
+            select(name="date-day")
                 option 1
                 option 2
                 option 3
@@ -49,7 +40,7 @@
                 option 28
                 option 29
                 option 30
-            select
+            select(name="date-year")
                 option 2000
                 option 2001
                 option 2002
@@ -73,107 +64,27 @@
                 option 2020
         .form-group.time
             label At
-            select
-                option 00
-                option 01
-                option 02
-                option 03
-                option 04
-                option 05
-                option 06
-                option 07
-                option 08
-                option 09
-                option 10
-                option 11
-                option 12
-                option 13
-                option 14
-                option 15
-                option 16
-                option 17
-                option 18
-                option 19
-                option 20
-                option 21
-                option 22
-                option 23
+            select(name="date-hour")
+                - for (n = 0 ; n < 24 ; n++)
+                    option(value=n)= n < 10 ? '0' + n : n
             span.separator :
-            select
-                option 00
-                option 01
-                option 02
-                option 03
-                option 04
-                option 05
-                option 06
-                option 07
-                option 08
-                option 09
-                option 10
-                option 11
-                option 12
-                option 13
-                option 14
-                option 15
-                option 16
-                option 17
-                option 18
-                option 19
-                option 20
-                option 21
-                option 22
-                option 23
-                option 24
-                option 25
-                option 26
-                option 27
-                option 28
-                option 29
-                option 30
-                option 31
-                option 32
-                option 33
-                option 34
-                option 35
-                option 36
-                option 37
-                option 38
-                option 39
-                option 40
-                option 41
-                option 42
-                option 43
-                option 44
-                option 45
-                option 46
-                option 47
-                option 48
-                option 49
-                option 50
-                option 51
-                option 52
-                option 53
-                option 54
-                option 55
-                option 56
-                option 57
-                option 58
-                option 59
+            select(name="date-minute")
+                - for (n = 0 ; n < 60 ; n++)
+                    option(value=n)= n < 10 ? '0' + n : n
         .this-other-form-group
             label(for='amount-euros') I spent:
             .amount-wrapper
                 input#amount-euros(name='amount-euros', placeholder='0,00 ', type='number', step="0.01")
         .form-group
             label On the following:
-            input.tags(value='#almoco.ginasio #mensal' name="tags")
+            input.tags(placeholder='#lunch #monthly' name="tags")
         .form-group
             label(for='description') Here's more information about it:
             textarea#description(name='description')
         .button-row-2
-            button.button.secondary
+            button.button.secondary.js-cancel
                 span.batch-icon &#xf165;
                 |  Cancel
-            button.button.main
+            button.button.main.js-add
                 span.batch-icon &#xf01d;
                 |  Add

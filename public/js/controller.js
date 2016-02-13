@@ -24,17 +24,29 @@ $(function () {
     }
 
     var $formNew = $('#form-new');
-    $formNew.on('click', 'button', function (ev) {
+    $formNew.on('click', 'button.js-add', function (ev) {
         ev.preventDefault();
+        var date = new Date(
+            parseFloat($formNew.find('[name="date-year"]').val()),
+            parseFloat($formNew.find('[name="date-month"]').val() - 1),
+            parseFloat($formNew.find('[name="date-day"]').val()),
+            parseFloat($formNew.find('[name="date-hour"]').val()),
+            parseFloat($formNew.find('[name="date-minute"]').val())
+        );
         API.new({
             amount: parseFloat($formNew.find('input[name="amount-euros"]').val()),
             tags: $formNew.find('input[name="tags"]').val().trim(),
-            date: new Date(),
+            date: date,
             description: $formNew.find('input[name="description"]').val()
         }, function (id) {
-            console.log('added ID ' + id);
+            //console.log('added ID ' + id);
+            $('#floater-add-new').removeClass('onscreen');
             doSearch();
         });
+    });
+    $formNew.on('click', 'button.js-cancel', function (ev) {
+        ev.preventDefault();
+        $('#floater-add-new').removeClass('onscreen');
     });
 
     var $data = $('#data');
