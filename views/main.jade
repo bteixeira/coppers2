@@ -1,33 +1,92 @@
 extends layout
 
 block content
-    div.section
-        = 'You are: '
-        strong= email
-    div.section
-        form#form-new
-            input(name="date" placeholder="When (now)" disabled)
-            input(name="amount" placeholder="How much")
-            input(name="tags" placeholder="On what")
-            input(name="description" placeholder="More info")
-            button Ok
-    div.section#data
-    div.section
-        form#form-filters
-            input(name="amount-min" placeholder="0.00")
-            input(name="amount-max" placeholder="100.00")
-            input(name="date-min" placeholder="2000-01-01")
-            input(name="date-max" placeholder="2020-12-31")
-            input(name="tags" placeholder="Tags")
-            button Filter
-    div.section
-        form#form-group
-            select
-                option None
-                option By Tag
-                option Daily
-                option Weekly
-                option Monthly
-                option Yearly
-    div.section
-        a(href="/logout") Log out
+
+    .header
+        .title
+            = 'Coppers '
+            span.batch-icon &#xf0d7;
+        .nav-user
+            a#nav-user(href="#")
+                span.batch-icon &#xf044;
+
+    .navigation
+        .nav-column
+            a#nav-new(href='#')
+                span.batch-icon &#xf015;
+                |  New
+        .nav-column
+            a#nav-filter(href='#')
+                span.batch-icon &#xf11e;
+                |  Filter
+        .nav-column
+            a#nav-group(href='#')
+                span.batch-icon &#xf127;
+                |  Group
+
+    .content
+        #data
+
+        #no-data-yet
+            .icon
+                span.batch-icon &#xf0d7;
+            .title Welcome to Coppers!
+            .text
+                | You haven't added any data yet.
+                br
+                | Try&nbsp;&nbsp;
+                a(href='#')
+                    span.batch-icon &#xf015;
+                    |  adding a new Spending!
+
+        #no-results
+            .icon
+                span.batch-icon &#xf0d7;
+            .title No matching Spendings :(
+            .text
+                | Nothing matches your filtering criteria.
+                br
+                | Try&nbsp;&nbsp;
+                a(href='#')
+                    span.batch-icon &#xf11e;
+                    |  changing some of the filters!
+
+    include ./floaters/new
+    include ./floaters/filters
+    include ./floaters/grouping
+    include ./floaters/user
+
+
+    //div.section
+    //    = 'You are: '
+    //    strong= email
+    //div.section
+    //    form#form-new
+    //        input(name="date" placeholder="When (now)" disabled)
+    //        input(name="amount" placeholder="How much")
+    //        input(name="tags" placeholder="On what")
+    //        input(name="description" placeholder="More info")
+    //        button Ok
+    //div.section#data
+    //div.section
+    //    form#form-filters
+    //        input(name="amount-min" placeholder="0.00")
+    //        input(name="amount-max" placeholder="100.00")
+    //        input(name="date-min" placeholder="2000-01-01")
+    //        input(name="date-max" placeholder="2020-12-31")
+    //        input(name="tags" placeholder="Tags")
+    //        button Filter
+    //div.section
+    //    form#form-group
+    //        select
+    //            option None
+    //            option By Tag
+    //            option Daily
+    //            option Weekly
+    //            option Monthly
+    //            option Yearly
+    //div.section
+    //    a(href="/logout") Log out
+
+block additional_js
+    script(src="js/floaters.js")

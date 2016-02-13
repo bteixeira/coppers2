@@ -1,14 +1,7 @@
 @import "vars";
 
-.section {
-  padding: 20px 0;
-  border-bottom: solid 1px $border-gray;
-
-  input {
-    margin-bottom: 10px;
-    width: 100%;
-  }
-}
+@import "floaters";
+@import "no_data_yet";
 
 #data {
   table {
@@ -27,4 +20,8 @@
   tbody tr:nth-child(odd) {
     background: $border-gray;
   }
+}
+
+#no-results {
+  display: none;
 }

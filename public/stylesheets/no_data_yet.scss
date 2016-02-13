@@ -1,0 +1,33 @@
+#no-data-yet, #no-results {
+  display: none;
+  text-align: center;
+  /*height: 100%;*/
+  font-size: 14px;
+  padding: 60px;
+
+  &.on-screen {
+    display: block;
+  }
+}
+#no-data-yet .icon, #no-results .icon {
+  font-size: 60px;
+  color: #eee;
+  margin: 20px 0;
+}
+#no-data-yet .title, #no-results .title {
+  font-size: 18px;
+  font-style: italic;
+  /*font-weight: lighter;*/
+  /*font-family: 'Droid Serif', serif;*/
+  margin-bottom: 15px;
+  color: #d1d1d1;
+}
+#no-data-yet .text, #no-results .text {
+  line-height: 20px;
+}
+#no-data-yet a, #no-results a {
+  color: #d1d1d1;
+}
+#no-data-yet a:hover, #no-results a:hover {
+  text-decoration: underline;
+}

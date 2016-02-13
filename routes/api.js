@@ -113,22 +113,32 @@ router.get('/search', function (req, res) {
     q += 'ORDER BY date ASC;';
 
     db.any(q, params).then(function (spendings) {
-        db.many(`SELECT * FROM Spendings_Tags;`, []).then(function (tags) {
-            var byId = {};
-            spendings.forEach(function (spending) {
-                spending.tags = [];
-                byId[spending.id] = spending;
-            });
-
-            tags.forEach(function (tag) {
-                if (byId.hasOwnProperty(tag.id_spending)) {
-                    byId[tag.id_spending].tags.push(tag.tag);
+        if (!spendings.length) {
+            db.one('select count(1) from spendings where id_user = $1 limit 1;', [req.session.uid]).then(function (row) {
+                if (row.count > 0) {
+                    res.send(spendings);
+                } else {
+                    res.send(false);
                 }
             });
-            res.send(spendings);
-        }).catch(function (err) {
-            res.send(err);
-        });
+        } else {
+            db.many(`SELECT * FROM Spendings_Tags;`, []).then(function (tags) {
+                var byId = {};
+                spendings.forEach(function (spending) {
+                    spending.tags = [];
+                    byId[spending.id] = spending;
+                });
+
+                tags.forEach(function (tag) {
+                    if (byId.hasOwnProperty(tag.id_spending)) {
+                        byId[tag.id_spending].tags.push(tag.tag);
+                    }
+                });
+                res.send(spendings);
+            }).catch(function (err) {
+                res.send(err);
+            });
+        }
     }).catch(function (err) {
         console.log(err);
         res.send(err);

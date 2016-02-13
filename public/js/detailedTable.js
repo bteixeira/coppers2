@@ -18,24 +18,31 @@ var DetailedTable = (function () {
             var prevKey;
             var $table;
             var $tbody;
-            data_.forEach(function (spending) {
-                var key = spending.date.toDateString();
-                if (key !== prevKey) {
-                    prevKey = key;
-                    $table = $('<table><thead><tr><th colspan="3">' + key + '</th></tr></thead></table>');
-                    $tbody = $('<tbody></tbody>');
-                    $table.append($tbody);
-                    $data.append($table);
-                }
-                $tbody.append(
-                    '<tr><td class="amount">' +
+            if (data_) {
+                $('#no-data-yet').removeClass('on-screen');
+                data_.forEach(function (spending) {
+                    var key = spending.date.toDateString();
+                    if (key !== prevKey) {
+                        prevKey = key;
+                        $table = $('<table><thead><tr><th colspan="3">' + key + '</th></tr></thead></table>');
+                        $tbody = $('<tbody></tbody>');
+                        $table.append($tbody);
+                        $data.append($table);
+                    }
+                    $tbody.append(
+                        '<tr><td class="amount">' +
                         formatMoney(spending.amount) +
-                    '</td><td class="tags">' +
-                        spending.tags.map(function(tag){return '#' + tag;}).join(' ') +
-                    '</td><td>' +
+                        '</td><td class="tags">' +
+                        spending.tags.map(function (tag) {
+                            return '#' + tag;
+                        }).join(' ') +
+                        '</td><td>' +
                         '<button class="js-delete" data-id="' + spending.id + '">X</button>' +
-                    '</td></tr>');
-            });
+                        '</td></tr>');
+                });
+            } else {
+                $('#no-data-yet').toggleClass('on-screen', true);
+            }
         }
     };
 

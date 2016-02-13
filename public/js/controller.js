@@ -18,7 +18,7 @@ $(function () {
             params['date-max'] = new Date(p[0], p[1] - 1, p[2], 23, 59, 59);
         }
         API.search(params, function (spendings) {
-            console.log(spendings);
+            //console.log(spendings);
             DetailedTable.set(spendings);
         });
     }
@@ -27,7 +27,7 @@ $(function () {
     $formNew.on('click', 'button', function (ev) {
         ev.preventDefault();
         API.new({
-            amount: parseFloat($formNew.find('input[name="amount"]').val()),
+            amount: parseFloat($formNew.find('input[name="amount-euros"]').val()),
             tags: $formNew.find('input[name="tags"]').val().trim(),
             date: new Date(),
             description: $formNew.find('input[name="description"]').val()

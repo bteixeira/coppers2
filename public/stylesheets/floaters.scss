@@ -1,0 +1,38 @@
+.floater {
+  border: solid 8px #999;
+  border-top-width: 2px;
+  border-bottom-width: 0;
+  border-right: none;
+  overflow: auto;
+  background-color: #fafafa;
+  position: fixed;
+  padding: 10px;
+  left: 100%;
+  width: 90%;
+  top: 88px;
+  /*bottom: 0;*/
+  /*top: 0;*/
+  transition: left 600ms, box-shadow 600ms;
+  height: calc(100% - 88px);
+  /*padding-bottom: 0;*/
+  /*z-index: 999;*/
+  /*height: 50%;*/
+
+  .title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  .trigger-close {
+    font-family: "Batch";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  &.onscreen {
+    left: 10%;
+    box-shadow: -100px 0 rgba(0, 0, 0, 0.7);
+  }
+}
