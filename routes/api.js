@@ -83,7 +83,7 @@ router.get('/search', function (req, res) {
 
     console.log('REQ:', req.query);
 
-    var q = 'SELECT * FROM Spendings WHERE id_user = $1';
+    var q = 'SELECT * FROM Spendings WHERE id_user = $1 ';
     var params = [req.session.uid];
     for (var p in req.query) {
         if (req.query.hasOwnProperty(p)) {
@@ -112,7 +112,7 @@ router.get('/search', function (req, res) {
 
     q += 'ORDER BY date ASC;';
 
-    db.many(q, params).then(function (spendings) {
+    db.any(q, params).then(function (spendings) {
         db.many(`SELECT * FROM Spendings_Tags;`, []).then(function (tags) {
             var byId = {};
             spendings.forEach(function (spending) {

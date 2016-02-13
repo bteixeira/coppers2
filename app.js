@@ -67,9 +67,58 @@ app.use(session({
 
 
 module.exports = app;
-/*************************************************************************************/
+/** ***********************************************************************************/
 
 
+/********************************** PASSWORDLESS LOGIN ***********************************/
+var passwordless = require('passwordless');
+var MemoryStore = require('passwordless-memorystore'); //TODO A MEMORY STORE PROBABLY WON'T WORK WHEN MULTIPLE PROCESSES ARE RUNNING ON THE SERVER
+
+var Mailgun = require('mailgun-js');
+var api_key = 'key-df1bd8bfd566b92bc34a428fae80d8a7';
+var domain = 'over9000.net';
+var from_who = 'Coppers <coppers@over9000.net>';
+var mailgun = new Mailgun({apiKey: api_key, domain: domain});
+
+passwordless.init(new MemoryStore(), {userProperty: 'login'});
+passwordless.addDelivery(
+    function(tokenToSend, uidToSend, recipient, callback) {
+
+        var host; // TODO BAD PASSWORDLESS! THE HOSTNAME NEEDS TO BE OBTAINED FROM THE REQUEST. YOU'RE LOSING POINTS
+        if (app.get('env') === 'production') {
+            host = 'over9000:9009';
+        } else {
+            host = 'localhost:3000';
+        }
+        var link = 'http://' + host + '/login?token=' + tokenToSend + '&uid=' + encodeURIComponent(uidToSend);
+
+        console.log('************************************************');
+        console.log('TOKEN |' + tokenToSend + '|');
+        console.log('UID   |' + uidToSend + '|');
+        console.log('LINK  |' + link + '|');
+        console.log('************************************************');
+
+        var data = {
+            from: from_who,
+            to: recipient,
+            subject: 'Log in to Coppers',
+            html: `Hello!\nYou can now access your account here: <a href="${link}">${link}</a>`
+        };
+
+        mailgun.messages().send(data, function (err, body) {
+            if (err) {
+                console.log('got an error: ', err);
+            }
+            callback(err);
+        });
+    }, {
+        ttl: 15 * 60 * 1000 // token is valid for 15 min
+    }
+);
+
+app.use(passwordless.sessionSupport());
+
+/** ***********************************************************************************/
 
 app.use('/', routes);
 app.use('/api', api);

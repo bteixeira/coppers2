@@ -22,7 +22,7 @@ Spendings (
 CREATE TABLE
 IF NOT EXISTS
 Spendings_Tags (
-    id_spending INTEGER REFERENCES Spendings NOT NULL,
+    id_spending INTEGER REFERENCES Spendings NOT NULL ON DELETE CASCADE;,
     tag VARCHAR(255) NOT NULL
 );
 

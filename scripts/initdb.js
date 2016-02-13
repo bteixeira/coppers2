@@ -32,7 +32,6 @@ db.tx(function (t) {
 }).then(function (data) {
     console.log('\nBye bye.\n');
     pgpromise.end();
-}).catch(function (error) {
-    console.log(error);
+}).catch(function () {
     pgpromise.end();
 });

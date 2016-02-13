@@ -1,11 +1,14 @@
 var express = require('express');
 var router = express.Router();
+var passwordless = require('passwordless');
 
-router.all('/', function (req, res) {
-    req.session.cookie.maxAge = 0; // TODO THIS IS NOT WORKING, FIGURE OUT HOW TO REALLY GET RID OF THE COOKIE
-    req.session.destroy(function () {
+router.all('/',
+
+    passwordless.logout(),
+    function (req, res) {
         res.redirect('/login'); // TODO GET ROUTE PROGRAMMATICALLY
-    });
-});
+    }
+
+);
 
 module.exports = router;
