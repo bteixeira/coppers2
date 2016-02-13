@@ -1,4 +1,10 @@
 extends layout
-
+block additional_head
+    link(rel='stylesheet', href='/stylesheets/login.css')
 block content
-    | Check your email to get your login link!
+    div.header.login
+        div.title Coppers
+            span.batch-icon &#xf0d7;
+
+    div#page-content.login
+        | Check your email to get your login link!

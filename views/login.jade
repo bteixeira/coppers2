@@ -1,7 +1,23 @@
 extends layout
 
+block additional_head
+    link(rel='stylesheet', href='/stylesheets/login.css')
+
 block content
-    form#form-login(action="login" method="post")
-        label Input email
-        input(name="email")
-        button Ok
+    div.header.login
+        div.title Coppers
+            span.batch-icon &#xf0d7;
+
+    div#page-content.login
+        h3 Keep track of how much you spend daily/weekly/monthly
+        div.hint
+            | Start using <strong>Coppers</strong> by inserting your e-mail address below.
+            br
+            | You will receive a one-time link.
+            br
+            | No password needed.
+        form#form-login(action="login" method="post")
+            input(name="email" placeholder="Your e-mail")
+            button Ok
+        div.floating-bg
+            span.batch-icon &#xf0d7;

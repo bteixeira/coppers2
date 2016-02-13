@@ -1,0 +1,89 @@
+body, html {
+  background: #00cce9;
+  color: #fafafa;
+}
+
+.header.login {
+  background: #fafafa;
+  border-bottom: solid 2px #eaeaea;
+  box-shadow: 0 0 2px #eaeaea;
+  color: #e1e1e1;
+  height: 40px;
+
+  .title {
+    color: inherit;
+    float: none;
+    text-align: center;
+  }
+}
+
+#page-content.login {
+  margin-top: 40px;
+  padding: 20px;
+
+  & > * {
+    position: relative;
+    z-index: 2; // TODO FFS FIND A BETTER WAY TO HAVE THE DESIRED BACKGROUND
+  }
+
+  button {
+    border-radius: 3px;
+    width: 50%;
+    float: right;
+    //background: #e9cc00;
+    //background: #ffe519;
+    /*background: #ff007f;*/
+    /*background: #ff7e19;*/
+    background: #ffaf00;
+    /*background: #ccb714;*/
+    /*border-width: 0;*/
+    font: bold 16px Ubuntu;
+    /*border: solid 1px #d1d1d1;*/
+  }
+
+  input {
+    width: 100%;
+    border-radius: 3px;
+    outline: 0;
+    border: solid 1px #d1d1d1;
+    height: 40px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font: 16px Ubuntu;
+    color: #999;
+    padding: 9px;
+  }
+
+  input::placeholder {
+    color: #eaeaea;
+  }
+
+  input::-webkit-input-placeholder {
+    color: #eaeaea;
+  }
+
+  input::-moz-placeholder {
+    color: #eaeaea;
+  }
+
+  input:-ms-input-placeholder {
+    color: #eaeaea;
+  }
+
+  .hint {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 10px 0;
+    font-weight: bold;
+  }
+
+  .floating-bg {
+    position: absolute;
+    z-index: 1;
+    font-size: 300px;
+    right: 65%;
+    //top: 50%;
+    color: #00d1f1;
+    bottom: 0;
+  }
+}
