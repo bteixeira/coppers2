@@ -1,0 +1,253 @@
+#floater-filter.floater
+    a.trigger-close(href='#')
+        span.batch-icon &#xf165;
+    h2.title Apply Filters
+    form
+        #amount-text
+            input(type='checkbox')
+            |             Amount from
+            .value-min &euro; 0.00
+            |             to
+            .value-max &euro; 100.00
+        #amount.range-group
+            input#amount-min.min(type='range', name='amount-min', value='0', step='0.01')
+            input#amount-max.max(type='range', name='amount-max', value='100', step='0.01')
+        .date-picker.filter.unselected
+            input#date-from(type='checkbox')
+            label(for='date-from') From:
+            .button-group
+                select
+                    option Jan
+                    option Feb
+                    option Mar
+                    option Apr
+                    option May
+                    option Jun
+                    option Jul
+                    option Aug
+                    option Sep
+                    option Oct
+                    option Nov
+                    option Dec
+                button.trigger-calendar
+                    span.value 16
+                    span.batch-icon &#xf011;
+                select
+                    option 2010
+                    option 2011
+                    option 2012
+                    option 2013
+                    option 2014
+                    option 2015
+                    option(selected='') 2016
+                .calendar-popup
+                    table
+                        thead
+                            tr
+                                td.week-number
+                                td M
+                                td T
+                                td W
+                                td T
+                                td F
+                                td.weekend S
+                                td.weekend S
+                        tbody
+                            tr
+                                td.week-number 53
+                                td.blurred 28
+                                td.blurred 29
+                                td.blurred 30
+                                td.blurred 31
+                                td 1
+                                td.weekend 2
+                                td.weekend 3
+                            tr
+                                td.week-number 1
+                                td 4
+                                td 5
+                                td 6
+                                td 7
+                                td 8
+                                td.weekend 9
+                                td.weekend 10
+                            tr
+                                td.week-number 2
+                                td 11
+                                td 12
+                                td 13
+                                td 14
+                                td 15
+                                td.weekend 16
+                                td.weekend 17
+                            tr
+                                td.week-number 3
+                                td 18
+                                td 19
+                                td 20
+                                td 21
+                                td 22
+                                td.weekend 23
+                                td.weekend 24
+                            tr
+                                td.week-number 4
+                                td 25
+                                td 26
+                                td 27
+                                td 28
+                                td 29
+                                td.weekend 30
+                                td.weekend 31
+                            tr
+                                td.week-number 5
+                                td.blurred 1
+                                td.blurred 2
+                                td.blurred 3
+                                td.blurred 4
+                                td.blurred 5
+                                td.blurred.weekend 6
+                                td.blurred.weekend 7
+        .date-picker.filter.unselected
+            input#date-to(type='checkbox')
+            label(for='date-to') To:
+            .button-group
+                select
+                    option Jan
+                    option Feb
+                    option Mar
+                    option Apr
+                    option May
+                    option Jun
+                    option Jul
+                    option Aug
+                    option Sep
+                    option Oct
+                    option Nov
+                    option Dec
+                button.trigger-calendar
+                    span.value 16
+                    span.batch-icon &#xf011;
+                select
+                    option 2010
+                    option 2011
+                    option 2012
+                    option 2013
+                    option 2014
+                    option 2015
+                    option(selected='') 2016
+                .calendar-popup
+                    table
+                        thead
+                            tr
+                                td.week-number
+                                td M
+                                td T
+                                td W
+                                td T
+                                td F
+                                td.weekend S
+                                td.weekend S
+                        tbody
+                            tr
+                                td.week-number 53
+                                td.blurred 28
+                                td.blurred 29
+                                td.blurred 30
+                                td.blurred 31
+                                td 1
+                                td.weekend 2
+                                td.weekend 3
+                            tr
+                                td.week-number 1
+                                td 4
+                                td 5
+                                td 6
+                                td 7
+                                td 8
+                                td.weekend 9
+                                td.weekend 10
+                            tr
+                                td.week-number 2
+                                td 11
+                                td 12
+                                td 13
+                                td 14
+                                td 15
+                                td.weekend 16
+                                td.weekend 17
+                            tr
+                                td.week-number 3
+                                td 18
+                                td 19
+                                td 20
+                                td 21
+                                td 22
+                                td.weekend 23
+                                td.weekend 24
+                            tr
+                                td.week-number 4
+                                td 25
+                                td 26
+                                td 27
+                                td 28
+                                td 29
+                                td.weekend 30
+                                td.weekend 31
+                            tr
+                                td.week-number 5
+                                td.blurred 1
+                                td.blurred 2
+                                td.blurred 3
+                                td.blurred 4
+                                td.blurred 5
+                                td.blurred.weekend 6
+                                td.blurred.weekend 7
+        // <label>Tags:</label>
+        .multi-select.empty
+            .hint
+                span.hint-empty (No tag filtering)
+                span.hint-non-empty Show only for these tags:
+            ul.list-selected
+            ul.list-available
+                li.item
+                    a(href='#') #coffee
+                li.item
+                    a(href='#') #lunch
+                li.item
+                    a(href='#') #monthly
+                li.item
+                    a(href='#') #party
+                li.item
+                    a(href='#') #online-order
+                li.item
+                    a(href='#') #other
+            a.heading
+                span.text-open Add tag filter
+                span.text-close Ok
+        // <label>Accounts:</label>
+        .multi-select.empty
+            .hint
+                span.hint-empty (No account filtering)
+                span.hint-non-empty Show only for these accounts:
+            ul.list-selected
+            ul.list-available
+                li.item
+                    a(href='#') Checking
+                li.item
+                    a(href='#') Savings
+                li.item
+                    a(href='#') VISA
+                li.item
+                    a(href='#') MasterCard
+                li.item
+                    a(href='#') PayPal
+            a.heading
+                span.text-open Add account filter
+                span.text-close Ok
+    .button-row-2
+        button.button.secondary
+            span.batch-icon &#xf165;
+            |  Cancel
+        button.button.main
+            span.batch-icon &#xf164;
+            |  Apply
