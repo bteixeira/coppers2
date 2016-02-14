@@ -20,7 +20,7 @@ var data = [];
 router.post('/new', function (req, res) {
     console.log(req.body);
 
-    var amount = req.body.amount;
+    var amount = parseFloat(req.body.amount);
     var date = new Date(req.body.date);
     var description = req.body.description;
 
@@ -42,7 +42,7 @@ router.post('/new', function (req, res) {
             description
         ) VALUES (
             $1,
-            $2,
+            $2::money,
             $3,
             $4
         ) RETURNING ID;

@@ -19,7 +19,7 @@ var DetailedTable = (function () {
             var $table;
             var $tbody;
             if (data_) {
-                $('#no-data-yet').removeClass('on-screen');
+                $('#no-data-yet').removeClass('onscreen');
                 data_.forEach(function (spending) {
                     var key = spending.date.toDateString();
                     if (key !== prevKey) {
@@ -37,11 +37,11 @@ var DetailedTable = (function () {
                             return '#' + tag;
                         }).join(' ') +
                         '</td><td>' +
-                        '<button class="js-delete" data-id="' + spending.id + '">X</button>' +
+                        '<button class="delete" data-id="' + spending.id + '"><span class="batch-icon">&#xf155;</span></button>' +
                         '</td></tr>');
                 });
             } else {
-                $('#no-data-yet').toggleClass('on-screen', true);
+                $('#no-data-yet').toggleClass('onscreen', true);
             }
         }
     };
