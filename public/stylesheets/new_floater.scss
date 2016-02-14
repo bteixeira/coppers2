@@ -1,0 +1,61 @@
+#floater-add-new {
+  input, textarea, select, .amount-wrapper {
+    border: solid 1px #d1d1d1;
+    color: #7b7b7b;
+    padding: 10px;
+    outline: 0;
+    width: 100%;
+    font: 14px Ubuntu;
+    border-radius: 4px;
+  }
+
+  select {
+    width: auto;
+    min-width: 60px;
+    padding: 3px 3px;
+    margin-left: 10px;
+    background: white;
+    text-align: center;
+  }
+
+  label {
+    display: inline-block;
+    font-size: 12px;
+    margin: 10px 0 5px;
+  }
+
+  .form-group.date label,
+  .form-group.time label {
+    width: 20px;
+  }
+
+  .form-group.time select[name="date-minute"] {
+    margin-left: 2px;
+  }
+
+  .amount-wrapper {
+    padding: 0 0 0 20px;
+    position: relative;
+    border-radius: 4px;
+    input {
+      border: 0;
+    }
+    &:before {
+      content: "€";
+      position: absolute;
+      left: 10px;
+      height: 100%;
+      line-height: 36px;
+    }
+  }
+
+  .button-row-2 {
+    button {
+      font-weight: bold;
+      &.main {
+        background: #ffaf00;
+      }
+    }
+  }
+
+}

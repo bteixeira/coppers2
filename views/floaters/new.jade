@@ -67,6 +67,7 @@
             select(name="date-hour")
                 - for (n = 0 ; n < 24 ; n++)
                     option(value=n)= n < 10 ? '0' + n : n
+            = ' '
             span.separator :
             select(name="date-minute")
                 - for (n = 0 ; n < 60 ; n++)
