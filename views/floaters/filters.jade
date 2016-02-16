@@ -6,9 +6,9 @@
         #amount-text
             input(type='checkbox')
             |             Amount from
-            .value-min &euro; 0.00
+            span.value-min &euro; 0.00
             |             to
-            .value-max &euro; 100.00
+            span.value-max &euro; 100.00
         #amount.range-group
             input#amount-min.min(type='range', name='amount-min', value='0', step='0.01')
             input#amount-max.max(type='range', name='amount-max', value='100', step='0.01')
@@ -223,26 +223,6 @@
                     a(href='#') #other
             a.heading
                 span.text-open Add tag filter
-                span.text-close Ok
-        // <label>Accounts:</label>
-        .multi-select.empty
-            .hint
-                span.hint-empty (No account filtering)
-                span.hint-non-empty Show only for these accounts:
-            ul.list-selected
-            ul.list-available
-                li.item
-                    a(href='#') Checking
-                li.item
-                    a(href='#') Savings
-                li.item
-                    a(href='#') VISA
-                li.item
-                    a(href='#') MasterCard
-                li.item
-                    a(href='#') PayPal
-            a.heading
-                span.text-open Add account filter
                 span.text-close Ok
     .button-row-2
         button.button.secondary

@@ -90,18 +90,19 @@ router.get('/search', function (req, res) {
     var params = [req.session.uid];
     for (var p in req.query) {
         if (req.query.hasOwnProperty(p)) {
-            params.push(req.query[p]);
             q += 'AND ';
             if (p === 'amount-min') {
-                q += 'amount >= $' + params.length + ' ';
+                params.push(parseFloat(req.query[p]));
+                q += 'amount >= $' + params.length + '::money ';
             } else if (p === 'amount-max') {
-                q += 'amount <= $' + params.length + ' ';
+                params.push(parseFloat(req.query[p]));
+                q += 'amount <= $' + params.length + '::money ';
             } else if (p === 'date-min') {
+                params.push(new Date(req.query[p]));
                 q += 'date >= $' + params.length + ' ';
-                params[params.length - 1] = new Date(params[params.length - 1]);
             } else if (p === 'date-max') {
+                params.push(new Date(req.query[p]));
                 q += 'date <= $' + params.length + ' ';
-                params[params.length - 1] = new Date(params[params.length - 1]);
             }
         }
     }

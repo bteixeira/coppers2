@@ -1,0 +1,102 @@
+.date-picker {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.date-picker.unselected button, .date-picker.unselected select {
+  color: #d1d1d1;
+}
+
+.date-picker button {
+  width: auto;
+  min-width: 60px;
+  padding: 4px;
+  background: white;
+  color: #7b7b7b;
+  border: solid 1px #d1d1d1;
+  font-weight: normal;
+  border-radius: 3px;
+}
+
+.date-picker select {
+  padding: 3px;
+  width: auto;
+  min-width: 60px;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+
+.date-picker .button-group {
+  float: right;
+}
+.date-picker:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.date-picker input[type="checkbox"] {
+  margin: 0;
+  vertical-align: middle;
+}
+
+.date-picker .calendar-popup {
+  /*height: 0;*/
+  overflow: hidden;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: none;
+  border: solid 1px #d1d1d1;
+  /*border-top: 0;*/
+  margin-top: 1px;
+  box-shadow: #666 0 1px 1px 0;
+  z-index: 100;
+}
+.date-picker .calendar-popup.onscreen {
+
+  /*height: auto;*/
+  display: block;
+}
+
+.date-picker .calendar-popup table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.date-picker .calendar-popup table td {
+  padding: 6px;
+  text-align: center;
+  font-size: 12px;
+  background: #fafafa;
+}
+
+.date-picker .calendar-popup table thead td {
+  background: #eaeaea;
+}
+
+.date-picker .calendar-popup table tbody td {
+  font-weight: bold;
+}
+
+.date-picker .calendar-popup table .blurred {
+  color: #d1d1d1;
+  font-weight: normal;
+}
+.date-picker .calendar-popup table tbody .weekend {
+  background: #f1f1f1;
+}
+.date-picker .calendar-popup table tbody tr:hover {
+  color: #999;
+}
+.date-picker .calendar-popup table tbody td:not(.week-number):hover {
+  color: #666;
+}
+.date-picker .calendar-popup table .week-number {
+  font-size: 10px;
+  border-right: solid 1px #d1d1d1;
+  text-align: left;
+  font-weight: normal;
+}

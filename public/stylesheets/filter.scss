@@ -1,0 +1,47 @@
+.range-group {
+  position: relative;
+  margin: 20px 0 0;
+  padding: 10px 0;
+}
+
+.range-group input[type="range"] {
+  position: absolute;
+  top: 0;
+  /*left: 0;*/
+  /*width: 100%;*/
+}
+
+.range-group input[type="range"].min {
+  left: 0;
+  right: 24px;
+}
+.range-group input[type="range"].max {
+  left: 24px;
+  right: 0;
+}
+
+.range-group .value-min {
+  /*float: left;*/
+}
+#amount-text {
+  font-size: 12px;
+}
+#amount-text input[type="checkbox"] {
+  margin: 0;
+  vertical-align: middle;
+}
+/*.range-group .value-min, .value-max {*/
+#amount-text .value-min, #amount-text .value-max {
+  /*font-size: 12px;*/
+  /*margin-top: 10px;*/
+  font-weight: bold;
+  display: inline;
+}
+.range-group .value-max {
+  /*float: right;*/
+}
+.range-group:after {
+  display: block;
+  content: "";
+  clear: both;
+}
