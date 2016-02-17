@@ -16,24 +16,14 @@
             input#date-from(type='checkbox')
             label(for='date-from') From:
             .button-group
-                select
-                    option Jan
-                    option Feb
-                    option Mar
-                    option Apr
-                    option May
-                    option Jun
-                    option Jul
-                    option Aug
-                    option Sep
-                    option Oct
-                    option Nov
-                    option Dec
+                select(name="date-month")
+                    each val, i in ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                        option(value=(i + 1))= val
                 button.trigger-calendar
                     span.value 16
                     = ' '
                     span.batch-icon &#xf011;
-                select
+                select(name="date-year")
                     option 2010
                     option 2011
                     option 2012
@@ -112,24 +102,14 @@
             input#date-to(type='checkbox')
             label(for='date-to') To:
             .button-group
-                select
-                    option Jan
-                    option Feb
-                    option Mar
-                    option Apr
-                    option May
-                    option Jun
-                    option Jul
-                    option Aug
-                    option Sep
-                    option Oct
-                    option Nov
-                    option Dec
+                select(name="date-month")
+                    each val, i in ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                        option(value=(i + 1))= val
                 button.trigger-calendar
                     span.value 16
                     = ' '
                     span.batch-icon &#xf011;
-                select
+                select(name="date-year")
                     option 2010
                     option 2011
                     option 2012

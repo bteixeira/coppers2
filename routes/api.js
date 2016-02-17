@@ -89,7 +89,7 @@ router.get('/search', function (req, res) {
     var q = 'SELECT * FROM Spendings WHERE id_user = $1 ';
     var params = [req.session.uid];
     for (var p in req.query) {
-        if (req.query.hasOwnProperty(p)) {
+        if (req.query.hasOwnProperty(p) && p !== 'tags') {
             q += 'AND ';
             if (p === 'amount-min') {
                 params.push(parseFloat(req.query[p]));
@@ -138,6 +138,16 @@ router.get('/search', function (req, res) {
                         byId[tag.id_spending].tags.push(tag.tag);
                     }
                 });
+
+                // TODO EVEN WORSE
+                if (req.query.tags) {
+                    spendings = spendings.filter(function (spending) {
+                        return spending.tags.some(function (tag) {
+                            return req.query.tags.indexOf(tag) !== -1;
+                        });
+                    });
+                }
+
                 res.send(spendings);
             }).catch(function (err) {
                 res.send(err);

@@ -6,15 +6,41 @@ $(function () {
             params['amount-min'] = parseFloat($('#amount-min').val());
             params['amount-max'] = parseFloat($('#amount-max').val());
         }
-        var dateMin = params['date-min'];
-        if (dateMin) {
-            var p = dateMin.split('-');
-            params['date-min'] = new Date(p[0], p[1] - 1, p[2], 0, 0, 0);
+        var tags = [];
+        $('#floater-filter .list-available .item.selected, #floater-filter .list-selected .item:not(.inactive)').each(function () {
+            tags.push(this.dataset.value);
+        });
+        if (tags.length) {
+            params.tags = tags;
         }
-        var dateMax = params['date-max'];
-        if (dateMax) {
-            p = dateMax.split('-');
-            params['date-max'] = new Date(p[0], p[1] - 1, p[2], 23, 59, 59);
+
+        var $dateFromGroup = $('#date-from').siblings('.button-group');
+        var $dateToGroup = $('#date-to').siblings('.button-group');
+        if ($('#date-from').is(':checked')) {
+            params['date-min'] = new Date(
+                parseInt(
+                    $dateFromGroup.find('select[name="date-year"]').val(), 10
+                ),
+                parseInt(
+                    $dateFromGroup.find('select[name="date-month"]').val(), 10
+                ) - 1,
+                parseInt(
+                    $dateFromGroup.find('.trigger-calendar .value').text(), 10
+                )
+            );
+        }
+        if ($('#date-to').is(':checked')) {
+            params['date-max'] = new Date(
+                parseInt(
+                    $dateToGroup.find('select[name="date-year"]').val(), 10
+                ),
+                parseInt(
+                    $dateToGroup.find('select[name="date-month"]').val(), 10
+                ) - 1,
+                parseInt(
+                    $dateToGroup.find('.trigger-calendar .value').text(), 10
+                )
+            );
         }
         API.search(params, function (spendings) {
             //console.log(spendings);
