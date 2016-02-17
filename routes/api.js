@@ -149,4 +149,31 @@ router.get('/search', function (req, res) {
     });
 });
 
+router.get('/stats/spendings', function (req, res) {
+    db.one(`
+        SELECT
+            COUNT(1)::integer,
+            MIN(amount)::numeric::float,
+            MAX(amount)::numeric::float
+        FROM Spendings
+        WHERE id_user = $1;
+    `, [req.session.uid]).then(function (data) {
+        res.send(data);
+    }).catch(function (err) {
+        res.send(err);
+    });
+});
+router.get('/tags/all', function (req, res) {
+    db.many(`
+        SELECT tag, COUNT(*)
+        FROM Spendings, Spendings_Tags
+        WHERE tag != '' AND Spendings_Tags.id_spending = Spendings.id AND Spendings.id_user = $1
+        GROUP BY tag;
+    `, [req.session.uid]).then(function (data) {
+        res.send(data);
+    }).catch(function (err) {
+        res.send(err);
+    });
+});
+
 module.exports = router;

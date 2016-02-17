@@ -22,6 +22,16 @@ var API = (function () {
             $.post('/api/delete', {id: id}, function () {
                 cb();
             });
+        },
+        stats: {
+            spendings: function (cb) {
+                $.get('/api/stats/spendings', cb);
+            }
+        },
+        tags: {
+            all: function (cb) {
+                $.get('/api/tags/all', cb);
+            }
         }
     }
 }());

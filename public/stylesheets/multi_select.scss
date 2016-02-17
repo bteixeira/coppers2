@@ -1,0 +1,126 @@
+.single-select, .multi-select {
+  /*background: #eaeaea;*/
+  /*background: #f1f1f1;*/
+  background: #fafafa;
+  /*color: #bbb;*/
+  border-radius: 3px;
+  /*border-color:   #eaeaea;*/
+  /*border-style: inset;*/
+  /*border-width: 1px;*/
+  border: solid 1px #d1d1d1;
+  padding: 5px;
+  margin: 5px 0;
+
+  .heading, .item {
+    cursor: pointer;
+  }
+}
+
+.single-select ul, .multi-select ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.multi-select li/*:not(:last-of-type)*/ {
+  /*margin-bottom: 5px;*/
+  margin-top: 5px;
+}
+
+.multi-select .list-selected {
+  /*color: #fafafa;*/
+  color: #666;
+  /*border-bottom: dashed 1px #fafafa;*/
+  border-bottom: dashed 1px #999;
+  margin: 10px 0 2px;
+}
+
+.multi-select .hint .hint-empty {
+  display: none;
+  font-size: 14px;
+  color: #bbb;
+}
+.multi-select .hint .hint-non-empty {
+
+}
+.multi-select.empty .hint .hint-empty {
+  display: inline;
+}
+.multi-select.empty .hint .hint-non-empty {
+  display: none;
+}
+.multi-select.expanded .hint .hint-empty {
+  display: none;
+}
+.multi-select.expanded .hint .hint-non-empty {
+  display: inline;
+}
+
+
+.multi-select .heading {
+  /*color: #fafafa;*/
+  /*font-weight: bold;*/
+  color: #666;
+  display: inline-block;
+  padding: 5px 0 0 15px;
+  /*padding-top: 10px;*/
+}
+.multi-select .heading .text-close {
+  display: none;
+}
+.multi-select .heading:before {
+  content: "\f01d";
+  font-family: "Batch";
+}
+.multi-select.expanded .heading:before {
+  content: "\f01e";
+}
+.multi-select.expanded .heading .text-close {
+  display: inline;
+}
+.multi-select.expanded .heading .text-open {
+  display: none;
+}
+
+.multi-select .list-available {
+  overflow: hidden;
+  height: 0;
+}
+
+.multi-select.expanded .list-available {
+  height: auto;
+}
+
+.single-select .list-available .item:before,
+.multi-select .list-available .item:before {
+  content: "\f020 ";
+  font-family: "Batch";
+}
+
+.single-select .list-available .item.selected,
+.multi-select .list-available .item.selected {
+  /*color: #fafafa;*/
+  color: #666;
+}
+.single-select .list-available .item.selected:before,
+.multi-select .list-available .item.selected:before {
+  content: "\f164 ";
+}
+
+.multi-select .list-selected .item:before {
+  content: "\f165 ";
+  font-family: "Batch";
+}
+.multi-select.expanded .list-selected .item:before {
+  content: "\f164 ";
+}
+
+.multi-select .list-selected .item.inactive {
+  color: #bbb;
+}
+.multi-select .list-selected .item.inactive:before {
+  content: "\f020 ";
+}
+.multi-select .list-selected .item:last-of-type {
+  margin-bottom: 10px;
+}

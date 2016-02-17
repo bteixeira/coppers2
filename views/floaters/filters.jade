@@ -5,9 +5,9 @@
     form
         #amount-text
             input(type='checkbox')
-            |             Amount from
+            = ' Amount from '
             span.value-min &euro; 0.00
-            |             to
+            = ' to '
             span.value-max &euro; 100.00
         #amount.range-group
             input#amount-min.min(type='range', name='amount-min', value='0', step='0.01')
@@ -31,6 +31,7 @@
                     option Dec
                 button.trigger-calendar
                     span.value 16
+                    = ' '
                     span.batch-icon &#xf011;
                 select
                     option 2010
@@ -126,6 +127,7 @@
                     option Dec
                 button.trigger-calendar
                     span.value 16
+                    = ' '
                     span.batch-icon &#xf011;
                 select
                     option 2010
@@ -203,25 +205,26 @@
                                 td.blurred.weekend 6
                                 td.blurred.weekend 7
         // <label>Tags:</label>
-        .multi-select.empty
+        #tags.multi-select.empty
             .hint
                 span.hint-empty (No tag filtering)
                 span.hint-non-empty Show only for these tags:
             ul.list-selected
             ul.list-available
-                li.item
-                    a(href='#') #coffee
-                li.item
-                    a(href='#') #lunch
-                li.item
-                    a(href='#') #monthly
-                li.item
-                    a(href='#') #party
-                li.item
-                    a(href='#') #online-order
-                li.item
-                    a(href='#') #other
+                //li.item
+                //    a(href='#') #coffee
+                //li.item
+                //    a(href='#') #lunch
+                //li.item
+                //    a(href='#') #monthly
+                //li.item
+                //    a(href='#') #party
+                //li.item
+                //    a(href='#') #online-order
+                //li.item
+                //    a(href='#') #other
             a.heading
+                | &nbsp;&nbsp;
                 span.text-open Add tag filter
                 span.text-close Ok
     .button-row-2

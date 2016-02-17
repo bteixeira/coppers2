@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "initdb": "node ./scripts/initdb",
+    "psql": "psql -h localhost -U coppers2_admin -d coppers2",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

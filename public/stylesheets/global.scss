@@ -128,3 +128,29 @@ button {
 button, .button, select, input, textarea {
   border-radius: 4px;
 }
+
+select {
+  box-sizing: content-box;
+  border: solid 1px #d1d1d1;
+  color: #7b7b7b;
+  font-size: 14px;
+  outline: 0;
+  border-radius: 6px;
+  padding: 3px 8px;
+  background-color: #fff;
+  /*font-family: 'Droid Serif', serif;*/
+  font-family: Ubuntu;
+  width: 45px;
+}
+button {
+  /*display: none;*/
+  background-color: #fd8a33;
+  border: 0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  outline: 0;
+  padding: 10px;
+  min-width: 80px;
+}

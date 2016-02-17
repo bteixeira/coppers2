@@ -32,14 +32,16 @@ $(function () {
             parseFloat($formNew.find('[name="date-hour"]').val()),
             parseFloat($formNew.find('[name="date-minute"]').val())
         );
-        API.new({
+        var spending = new Spending({
             amount: parseFloat($formNew.find('input[name="amount-euros"]').val()),
             tags: $formNew.find('input[name="tags"]').val().trim(),
             date: date,
             description: $formNew.find('input[name="description"]').val()
-        }, function (id) {
+        });
+        API.new(spending, function (id) {
             //console.log('added ID ' + id);
             $('#floater-add-new').removeClass('onscreen');
+            Stats.updateAdd(spending);
             doSearch();
         });
     });
@@ -55,6 +57,7 @@ $(function () {
             var id = $(this).data('id');
             API.delete(id, function () {
                 //console.log('deleted ID ' + id);
+                Stats.updateDelete(null);
                 doSearch();
             });
         }
@@ -90,5 +93,38 @@ $(function () {
         doSearch();
     });
 
+
+
+
+
+    $('.date-picker .trigger-calendar').on('click', function (ev) {
+        ev.preventDefault();
+        var $picker = $(this).closest('.date-picker');
+        var $popup = $picker.find('.calendar-popup');
+        if ($popup.is('.onscreen')) {
+            $popup.smoothlyCollapse(150, 'linear', function () {
+                $popup.removeClass('onscreen');
+            });
+        } else {
+            $popup.toggleClass('onscreen', true).smoothlyExpand();
+        }
+    });
+    $('.date-picker .calendar-popup tbody td:not(.week-number)').on('click', function (ev) {
+        $(this).closest('.date-picker').find('.trigger-calendar .value').text($(this).text());
+        $(this).closest('.date-picker').find('.calendar-popup').removeClass('onscreen');
+    });
+    $('.date-picker input[type="checkbox"]').on('click', function (ev) {
+        var $picker = $(this).closest('.date-picker');
+        $picker.toggleClass('unselected', !this.checked);
+    });
+    $('.date-picker button, .date-picker select').on('click', function() {
+        $(this).closest('.date-picker').find('input[type="checkbox"]').prop('checked', true);
+        $(this).closest('.date-picker').removeClass('unselected');
+    });
+
+
+
+
     doSearch();
+    Stats.fetch();
 });
