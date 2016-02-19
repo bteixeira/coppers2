@@ -8,7 +8,7 @@ var API = (function () {
                         date: new Date(raw.date),
                         description: raw.description,
                         id: raw.id,
-                        tags: raw.tags
+                        tags: raw.tags.split(' ')
                     });
                 }));
             });
