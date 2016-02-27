@@ -54,22 +54,6 @@ body, html {
     padding: 9px;
   }
 
-  input::placeholder {
-    color: #eaeaea;
-  }
-
-  input::-webkit-input-placeholder {
-    color: #eaeaea;
-  }
-
-  input::-moz-placeholder {
-    color: #eaeaea;
-  }
-
-  input:-ms-input-placeholder {
-    color: #eaeaea;
-  }
-
   .hint {
     font-size: 12px;
     line-height: 18px;

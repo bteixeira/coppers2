@@ -89,34 +89,8 @@ router.get('/search', function (req, res) {
     var select = 'Sp.*, string_agg(spt.tag, \' \') AS tags';
     var where = ['id_user = ' + pgpromise.as.number(req.session.uid)];
     var group = 'Sp.id';
-    var order = 'date ASC';
+    var order = 'date DESC';
 
-    //var q = 'SELECT * FROM Spendings WHERE id_user = $1 ';
-    //var params = [req.session.uid];
-
-    //for (var p in req.query) {
-    //    //if (req.query.hasOwnProperty(p) && p !== 'tags') {
-    //    //    q += 'AND ';
-    //    //    if (p === 'amount-min') {
-    //    //        params.push(parseFloat(req.query[p]));
-    //    //        q += 'amount >= $' + params.length + '::money ';
-    //    //    } else if (p === 'amount-max') {
-    //    //        params.push(parseFloat(req.query[p]));
-    //    //        q += 'amount <= $' + params.length + '::money ';
-    //    //    } else if (p === 'date-min') {
-    //    //        params.push(new Date(req.query[p]));
-    //    //        q += 'date >= $' + params.length + ' ';
-    //    //    } else if (p === 'date-max') {
-    //    //        params.push(new Date(req.query[p]));
-    //    //        q += 'date <= $' + params.length + ' ';
-    //    //    }
-    //    //}
-    //    if (req.query.hasOwnProperty(p)) {
-    //        if (p === 'amount-min') {
-    //
-    //        }
-    //    }
-    //}
     var operators = {
         'amount-min': function (val) {
             where.push(`amount >= ${pgpromise.as.number(val)}::money`);
@@ -138,26 +112,22 @@ router.get('/search', function (req, res) {
         },
         'group': function (val) {
             if (val === 'year') {
-                //YEARLY: select extract(year from date) as year, sum(amount) from spendings group by year;
                 select = 'EXTRACT(year FROM date) AS year, SUM(amount)';
                 group = 'year';
-                order = 'year ASC';
+                order = 'year DESC';
             } else if (val === 'month') {
-                //MONTHLY: select extract(year from date) as year, EXTRACT(month from date) as month, sum(amount) from spendings group by year, month;
                 select = 'EXTRACT(year FROM date) AS year, EXTRACT(month FROM date) AS month, SUM(amount)';
                 group = 'year, month';
-                order = 'year ASC, month ASC';
+                order = 'year DESC, month DESC';
             } else if (val === 'week') {
-                //WEEKLY: select extract(year from date) as year, extract(week from date) as week, sum(amount) from spendings group by year, week;
                 select = 'EXTRACT(year FROM date) AS year, EXTRACT(week FROM date) AS week, SUM(amount)';
                 group = 'year, week';
-                order = 'year ASC, week ASC';
+                order = 'year DESC, week DESC';
             } else if (val === 'day') {
-                //DAYLY: select extract(year from date) as year, EXTRACT(month from date) as month, extract (day from date) as day, sum(amount) from spendings group by year, month, day;
                 select = 'EXTRACT(year FROM date) AS year, EXTRACT(month FROM date) AS month, EXTRACT (day FROM date) AS day, SUM(amount)';
                 group = 'year, month, day';
+                order = 'year DESC, month DESC, day DESC';
             } else if (val === 'tag') {
-                //BY TAG: select spendings_tags.tag, sum(spendings.amount) from spendings, spendings_tags where spendings.id = spendings_Tags.id_spending group by spendings_tags.tag;
                 select = 'tag, SUM(amount) AS sum, COUNT(*) AS count';
                 group = 'tag';
                 order = 'tag ASC';
@@ -186,52 +156,6 @@ router.get('/search', function (req, res) {
         res.send(err);
     });
 
-    // TODO GROUPING
-
-
-    //q += 'ORDER BY date ASC;';
-
-    //db.any(q, params).then(function (spendings) {
-    //    if (!spendings.length) {
-    //        db.one('select count(1) from spendings where id_user = $1 limit 1;', [req.session.uid]).then(function (row) {
-    //            if (row.count > 0) {
-    //                res.send(spendings);
-    //            } else {
-    //                res.send(false);
-    //            }
-    //        });
-    //    } else {
-    //        db.many(`SELECT * FROM Spendings_Tags;`, []).then(function (tags) {
-    //            var byId = {};
-    //            spendings.forEach(function (spending) {
-    //                spending.tags = [];
-    //                byId[spending.id] = spending;
-    //            });
-    //
-    //            tags.forEach(function (tag) {
-    //                if (byId.hasOwnProperty(tag.id_spending)) {
-    //                    byId[tag.id_spending].tags.push(tag.tag);
-    //                }
-    //            });
-    //
-    //            // TODO EVEN WORSE
-    //            if (req.query.tags) {
-    //                spendings = spendings.filter(function (spending) {
-    //                    return spending.tags.some(function (tag) {
-    //                        return req.query.tags.indexOf(tag) !== -1;
-    //                    });
-    //                });
-    //            }
-    //
-    //            res.send(spendings);
-    //        }).catch(function (err) {
-    //            res.send(err);
-    //        });
-    //    }
-    //}).catch(function (err) {
-    //    console.log(err);
-    //    res.send(err);
-    //});
 });
 
 router.get('/stats/spendings', function (req, res) {

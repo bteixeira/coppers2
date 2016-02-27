@@ -60,6 +60,24 @@ body, html {
   }
 }
 
+$placeholder-color: #ddd;
+
+input::placeholder, textarea::placeholder {
+  color: $placeholder-color;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: $placeholder-color;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: $placeholder-color;
+}
+
+input:-ms-input-placeholder, textarea::-ms-input-placeholder {
+  color: $placeholder-color;
+}
+
 .navigation {
   /*clear: both;*/
   padding: 15px 5px;
