@@ -67,6 +67,7 @@ $(function () {
     var $data = $('#data');
     $data.on('click', '.delete', function (ev) {
         ev.preventDefault();
+        ev.stopPropagation();
         if (confirm('Really delete?')) {
             var id = $(this).data('id');
             API.delete(id, function () {
