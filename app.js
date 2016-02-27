@@ -55,8 +55,7 @@ app.use(session({
     saveUninitialized: false,
     unset: 'destroy',
     rolling: false,
-    //cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
-    cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
 }));
 
 
@@ -80,7 +79,7 @@ passwordless.addDelivery(
 
         var host; // TODO BAD PASSWORDLESS! THE HOSTNAME NEEDS TO BE OBTAINED FROM THE REQUEST. YOU'RE LOSING POINTS
         if (app.get('env') === 'production') {
-            host = 'over9000:9009';
+            host = 'over9000.net:9009';
         } else {
             host = 'localhost:3000';
         }
