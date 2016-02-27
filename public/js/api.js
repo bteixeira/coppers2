@@ -13,9 +13,14 @@ var API = (function () {
                 }));
             });
         },
-        new: function (data, cb) {
-            $.post('/api/new', data, function (data) {
+        insert: function (spending, cb) {
+            $.post('/api/new', spending.serialize(), function (data) {
                 cb(data.id);
+            });
+        },
+        update: function (spending, cb) {
+            $.post('/api/edit', spending.serialize(), function () {
+                cb();
             });
         },
         delete: function (id, cb) {

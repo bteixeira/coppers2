@@ -14,8 +14,18 @@ var pgpromise = require('pg-promise')({
 var db = pgpromise('postgres://coppers2_admin:coppers2@localhost/coppers2');
 var express = require('express');
 var router = express.Router();
+var _ = require('underscore');
 
 var data = [];
+
+function parseTags (tags) {
+    if (typeof tags === 'string') {
+        tags = tags.split(/\s+/);
+    }
+    return tags.map(function (tag) {
+        return tag.charAt(0) === '#' ? tag.slice(1) : tag;
+    });
+}
 
 router.post('/new', function (req, res) {
     console.log(req.body);
@@ -24,13 +34,7 @@ router.post('/new', function (req, res) {
     var date = new Date(req.body.date);
     var description = req.body.description;
 
-    var tags = req.body.tags;
-    if (typeof tags === 'string') {
-        tags = tags.split(/\s+/);
-    }
-    tags = tags.map(function (tag) {
-        return tag.charAt(0) === '#' ? tag.slice(1) : tag;
-    });
+    var tags = parseTags(req.body.tags);
 
     // TODO TAGS MAY BE DUPLICATED
 
@@ -66,6 +70,66 @@ router.post('/new', function (req, res) {
 });
 
 router.post('/edit', function (req, res) {
+    console.log('REQ FOR EDIT:', req.body);
+
+    var updates = _.chain(req.body)
+        .pick('amount date description'.split(' '))
+        .map((v, k) => {
+            var val;
+            if (k === 'amount') {
+                val = pgpromise.as.number(parseFloat(v)) + '::money';
+            } else if (k === 'date') {
+                val = pgpromise.as.date(new Date(v));
+            } else if (k === 'description') {
+                val = pgpromise.as.text(v)
+            }
+            return `${k} = ${val}`
+        })
+        .value()
+        .join(', ');
+
+    var tags = parseTags(req.body.tags);
+
+
+    // TODO THE FOLLOWING NESTES QUERIES MUST BE IN A TRANSACTION
+
+
+    db.none(`
+        UPDATE Spendings
+        SET ${updates}
+        WHERE id = ${req.body.id}
+        ;
+    `).then(function () {
+        db.none(`
+            DELETE FROM Spendings_Tags
+            WHERE id_spending = ${req.body.id}
+            AND tag NOT IN (${tags.map(t => pgpromise.as.text(t)).join(', ')})
+            ;
+        `).then(function () {
+            db.none(
+                tags.map(t => pgpromise.as.text(t)).map(tag => `
+                    INSERT INTO Spendings_Tags
+                        (id_spending, tag)
+                    SELECT
+                        ${req.body.id}, ${tag}
+                    WHERE NOT EXISTS (
+                        SELECT 1 FROM Spendings_Tags
+                        WHERE id_spending = ${req.body.id} AND tag = ${tag}
+                    )
+                    ;
+                `).join('')
+            ).then(function () {
+                res.send('ok');
+            }).catch(function (err) {
+                res.send(err);
+            });
+        }).catch(function (err) {
+            res.send(err);
+        });
+    }).catch(function (err) {
+        res.send(err);
+    });
+
     res.send('make changes');
 });
 
@@ -78,11 +142,6 @@ router.post('/delete', function (req, res) {
 });
 
 router.get('/search', function (req, res) {
-    // TODO
-    // TODO
-    // TODO
-    // TODO
-    // TODO OMFG FIGURE OUT HOW TO DO THIS WITH A SQL JOIN
 
     console.log('REQ:', req.query);
 

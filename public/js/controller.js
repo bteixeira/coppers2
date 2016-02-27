@@ -1,6 +1,5 @@
-$(function () {
-
-    function doSearch() {
+window.Controller = {
+    doSearch: function () {
         var params = {};
         if ($('#amount-text input[type="checkbox"]').is(':checked')) {
             params['amount-min'] = parseFloat($('#amount-min').val());
@@ -59,34 +58,11 @@ $(function () {
             }
         });
     }
+};
 
-    var $formNew = $('#form-new');
-    $formNew.on('click', 'button.js-add', function (ev) {
-        ev.preventDefault();
-        var date = new Date(
-            parseFloat($formNew.find('[name="date-year"]').val()),
-            parseFloat($formNew.find('[name="date-month"]').val() - 1),
-            parseFloat($formNew.find('[name="date-day"]').val())
-        );
-        var spending = new Spending({
-            amount: parseFloat($formNew.find('input[name="amount-euros"]').val()),
-            tags: $formNew.find('input[name="tags"]').val().trim(),
-            date: date,
-            description: $formNew.find('input[name="description"]').val()
-        });
-        API.new(spending, function (id) {
-            //console.log('added ID ' + id);
-            $('#floater-add-new').removeClass('onscreen');
-            $('#floater-overlay').toggleClass('active', false);
-            Stats.updateAdd(spending);
-            doSearch();
-        });
-    });
-    $formNew.on('click', 'button.js-cancel', function (ev) {
-        ev.preventDefault();
-        $('#floater-add-new').removeClass('onscreen');
-        $('#floater-overlay').toggleClass('active', false);
-    });
+$(function () {
+
+    var doSearch = Controller.doSearch;
 
     var $data = $('#data');
     $data.on('click', '.delete', function (ev) {
@@ -150,9 +126,6 @@ $(function () {
     });
 
 
-
-
-
     $('.date-picker .trigger-calendar').on('click', function (ev) {
         ev.preventDefault();
         var $picker = $(this).closest('.date-picker');
@@ -179,7 +152,10 @@ $(function () {
     });
 
 
-
+    $('#data').on('click', '.detailed tr', function () {
+        var spending = $(this).data('spending');
+        Floaters.New.edit(spending);
+    });
 
     doSearch();
     Stats.fetch();

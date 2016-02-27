@@ -59,37 +59,6 @@ block content
     include ./floaters/user
 
 
-    //div.section
-    //    = 'You are: '
-    //    strong= email
-    //div.section
-    //    form#form-new
-    //        input(name="date" placeholder="When (now)" disabled)
-    //        input(name="amount" placeholder="How much")
-    //        input(name="tags" placeholder="On what")
-    //        input(name="description" placeholder="More info")
-    //        button Ok
-    //div.section#data
-    //div.section
-    //    form#form-filters
-    //        input(name="amount-min" placeholder="0.00")
-    //        input(name="amount-max" placeholder="100.00")
-    //        input(name="date-min" placeholder="2000-01-01")
-    //        input(name="date-max" placeholder="2020-12-31")
-    //        input(name="tags" placeholder="Tags")
-    //        button Filter
-    //div.section
-    //    form#form-group
-    //        select
-    //            option None
-    //            option By Tag
-    //            option Daily
-    //            option Weekly
-    //            option Monthly
-    //            option Yearly
-    //div.section
-    //    a(href="/logout") Log out
-
 block additional_js
     script(src="js/api.js")
     script(src="js/smoothly.js")
@@ -103,6 +72,7 @@ block additional_js
     script(src="js/floaters.js")
     script(src="js/multi_select.js")
     script(src="js/single_select.js")
+    script(src="js/floaterNew.js")
 
 block additional_head
     link(rel="stylesheet", href="/stylesheets/slider.css")
