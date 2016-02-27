@@ -28,11 +28,14 @@
     "jade": "~1.11.0",
     "mailgun-js": "^0.7.7",
     "morgan": "~1.6.1",
-    "node-sass-middleware": "0.8.0",
     "passwordless": "^1.1.0",
     "passwordless-memorystore": "0.0.1",
     "pg-promise": "^3.1.6",
     "serve-favicon": "~2.3.0"
   },
-  "homepage": "https://github.com/bteixeira/coppers2"
+  "homepage": "https://github.com/bteixeira/coppers2",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.2.0"
+  }
 }
