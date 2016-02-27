@@ -66,9 +66,7 @@ $(function () {
         var date = new Date(
             parseFloat($formNew.find('[name="date-year"]').val()),
             parseFloat($formNew.find('[name="date-month"]').val() - 1),
-            parseFloat($formNew.find('[name="date-day"]').val()),
-            parseFloat($formNew.find('[name="date-hour"]').val()),
-            parseFloat($formNew.find('[name="date-minute"]').val())
+            parseFloat($formNew.find('[name="date-day"]').val())
         );
         var spending = new Spending({
             amount: parseFloat($formNew.find('input[name="amount-euros"]').val()),
@@ -79,6 +77,7 @@ $(function () {
         API.new(spending, function (id) {
             //console.log('added ID ' + id);
             $('#floater-add-new').removeClass('onscreen');
+            $('#floater-overlay').toggleClass('active', false);
             Stats.updateAdd(spending);
             doSearch();
         });
@@ -86,6 +85,7 @@ $(function () {
     $formNew.on('click', 'button.js-cancel', function (ev) {
         ev.preventDefault();
         $('#floater-add-new').removeClass('onscreen');
+        $('#floater-overlay').toggleClass('active', false);
     });
 
     var $data = $('#data');
@@ -129,19 +129,23 @@ $(function () {
 
     $('#floater-filter button.main').on('click', function () {
         $('#floater-filter').removeClass('onscreen');
+        $('#floater-overlay').toggleClass('active', false);
         doSearch();
     });
     $('#floater-filter button.secondary').on('click', function () {
         $('#floater-filter').removeClass('onscreen');
+        $('#floater-overlay').toggleClass('active', false);
         // TODO RESET FILTER VALUES
     });
 
     $('#floater-group button.main').on('click', function () {
         $('#floater-group').removeClass('onscreen');
+        $('#floater-overlay').toggleClass('active', false);
         doSearch();
     });
     $('#floater-group button.secondary').on('click', function () {
         $('#floater-group').removeClass('onscreen');
+        $('#floater-overlay').toggleClass('active', false);
         // TODO RESET FILTER VALUES
     });
 

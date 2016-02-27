@@ -8,7 +8,7 @@
   position: fixed;
   padding: 10px;
   left: 100%;
-  width: 90%;
+  width: calc(100% - 30px);
   top: 88px;
   /*bottom: 0;*/
   /*top: 0;*/
@@ -37,7 +37,26 @@
   }
 
   &.onscreen {
-    left: 10%;
-    box-shadow: -100px 0 rgba(0, 0, 0, 0.7);
+    left: 30px;
+  }
+
+}
+
+#floater-overlay {
+  $delay: 150ms;
+  $func: linear;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s $delay, opacity $delay $func;
+  &.active {
+    opacity: 0.75;
+    visibility: visible;
+    transition: opacity $delay $func;
   }
 }

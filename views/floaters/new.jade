@@ -62,16 +62,6 @@
                 option 2018
                 option 2019
                 option 2020
-        .form-group.time
-            label At
-            select(name="date-hour")
-                - for (n = 0 ; n < 24 ; n++)
-                    option(value=n)= n < 10 ? '0' + n : n
-            = ' '
-            span.separator :
-            select(name="date-minute")
-                - for (n = 0 ; n < 60 ; n++)
-                    option(value=n)= n < 10 ? '0' + n : n
         .this-other-form-group
             label(for='amount-euros') I spent:
             .amount-wrapper
