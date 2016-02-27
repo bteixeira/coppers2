@@ -141,22 +141,26 @@ router.get('/search', function (req, res) {
                 //YEARLY: select extract(year from date) as year, sum(amount) from spendings group by year;
                 select = 'EXTRACT(year FROM date) AS year, SUM(amount)';
                 group = 'year';
+                order = 'year ASC';
             } else if (val === 'month') {
                 //MONTHLY: select extract(year from date) as year, EXTRACT(month from date) as month, sum(amount) from spendings group by year, month;
                 select = 'EXTRACT(year FROM date) AS year, EXTRACT(month FROM date) AS month, SUM(amount)';
                 group = 'year, month';
+                order = 'year ASC, month ASC';
             } else if (val === 'week') {
                 //WEEKLY: select extract(year from date) as year, extract(week from date) as week, sum(amount) from spendings group by year, week;
                 select = 'EXTRACT(year FROM date) AS year, EXTRACT(week FROM date) AS week, SUM(amount)';
                 group = 'year, week';
+                order = 'year ASC, week ASC';
             } else if (val === 'day') {
                 //DAYLY: select extract(year from date) as year, EXTRACT(month from date) as month, extract (day from date) as day, sum(amount) from spendings group by year, month, day;
                 select = 'EXTRACT(year FROM date) AS year, EXTRACT(month FROM date) AS month, EXTRACT (day FROM date) AS day, SUM(amount)';
                 group = 'year, month, day';
             } else if (val === 'tag') {
                 //BY TAG: select spendings_tags.tag, sum(spendings.amount) from spendings, spendings_tags where spendings.id = spendings_Tags.id_spending group by spendings_tags.tag;
-                select = 'tag, SUM(amount)';
+                select = 'tag, SUM(amount) AS sum, COUNT(*) AS count';
                 group = 'tag';
+                order = 'tag ASC';
             }
         }
     };

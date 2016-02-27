@@ -4,16 +4,18 @@
     h2.title Apply Grouping
     .single-select
         ul.list-available
-            li.item.selected.default
-                a(href='#') No grouping
-            li.item
-                a(href='#') Day total
-            li.item
-                a(href='#') Week total
-            li.item
-                a(href='#') Month total
-            li.item
-                a(href='#') Year total
+            li.item.selected.default(data-value="")
+                a(href='#')  No grouping
+            li.item(data-value="tag")
+                a(href='#')  Total per tag
+            li.item(data-value="day")
+                a(href='#')  Day total
+            li.item(data-value="week")
+                a(href='#')  Week total
+            li.item(data-value="month")
+                a(href='#')  Month total
+            li.item(data-value="year")
+                a(href='#')  Year total
     .button-row-2
         button.button.secondary
             span.batch-icon &#xf165;

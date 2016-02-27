@@ -42,9 +42,21 @@ $(function () {
                 )
             );
         }
+
+        var group = $('#floater-group .list-available .item.selected').data('value');
+        if (group) {
+            params.group = group;
+        }
+
         API.search(params, function (spendings) {
             //console.log(spendings);
-            DetailedTable.set(spendings);
+            if (group) {
+                DetailedTable.set(null);
+                GroupedTable.set(spendings, group);
+            } else {
+                GroupedTable.set(null);
+                DetailedTable.set(spendings);
+            }
         });
     }
 
@@ -114,9 +126,23 @@ $(function () {
             }
         });
     });
+
     $('#floater-filter button.main').on('click', function () {
         $('#floater-filter').removeClass('onscreen');
         doSearch();
+    });
+    $('#floater-filter button.secondary').on('click', function () {
+        $('#floater-filter').removeClass('onscreen');
+        // TODO RESET FILTER VALUES
+    });
+
+    $('#floater-group button.main').on('click', function () {
+        $('#floater-group').removeClass('onscreen');
+        doSearch();
+    });
+    $('#floater-group button.secondary').on('click', function () {
+        $('#floater-group').removeClass('onscreen');
+        // TODO RESET FILTER VALUES
     });
 
 
